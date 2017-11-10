@@ -92,7 +92,7 @@ public class LinkedList<T> implements Iterable<T> {
         String s = "[";
         for (T x : this)
             s += x + ", ";
-        return s.substring(0, s.length()-2) + "] OLAAAA";
+        return s.substring(0, s.length()-2) + "]";
     }
 
     public void set(int index, T x) {
