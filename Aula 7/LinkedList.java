@@ -1,6 +1,5 @@
-import java.util.Iterator;
 
-public class LinkedList<T> implements Iterable<T> {
+public class LinkedList<T> implements Iterable<T>, ILinkedLists<T> {
     private SingleNode<T> header, tail;
     private int size;
 
@@ -30,7 +29,6 @@ public class LinkedList<T> implements Iterable<T> {
             add(x);
         else {
             SingleNode<T> prev = getNode(i - 1);
-            ;
             SingleNode<T> newNode = new SingleNode<>(x, prev.getNext());
             prev.setNext(newNode);
             size++;
@@ -48,20 +46,20 @@ public class LinkedList<T> implements Iterable<T> {
         add(tail, x);
     }
 
-    public void remove(int index) { //try{ remove.....} catch ( exception e)}
-        remove(getNode(index - 1));
+    public void removeIndex(int index) { //try{ remove.....} catch ( exception e)}
+        removeNode(getNode(index - 1));
     }
 
-    public void remove(SingleNode<T> prev) {
+    public void removeNode(SingleNode<T> prev) {
         prev.setNext(prev.getNext().getNext());
         size--;
     }
 
-    public void removeElement(T x){ //remove first occurrence of the node with the element x
+    public void remove(T x){ //remove first occurrence of the node with the element x
         SingleNode<T> r = header();
         for(T v : this){
             if(v.equals(x)){
-                remove(r);
+                removeNode(r);
             }else{
                 r = r.getNext();
             }
@@ -75,17 +73,6 @@ public class LinkedList<T> implements Iterable<T> {
         while (index++ < i) //same as   while(index < i){<...body...>; index++;}
             s = s.getNext();
         return s;
-    }
-
-    SingleNode<T> findPrevious(T x) {
-        SingleNode<T> p = header();
-        for (T v : this) {
-            if (v.equals(x))
-                return p;
-            else
-                p = p.getNext();
-        }
-        throw new java.util.NoSuchElementException("No element");
     }
 
     public String toString() {

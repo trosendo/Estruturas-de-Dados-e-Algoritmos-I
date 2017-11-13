@@ -9,7 +9,7 @@ public class Main {
         l.add(5, 6);
         l.add(1, 55);
         l.add(4, 12);
-        l.removeElement(12);
+        l.remove(12);
         System.out.println(l.toString());
 
     }
