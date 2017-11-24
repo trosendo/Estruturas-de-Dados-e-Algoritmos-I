@@ -1,25 +1,24 @@
 public class Tester {
     public static void main(String[] args){
-        BinarySearchTree tree = new BinarySearchTree();
-        tree.insert(45);
-        tree.insert(34);
-        tree.insert(3);
-        tree.insert(6);
-        tree.insert(19);
-        tree.insert(32);
-        tree.insert(77);
-        tree.insert(8);
-        tree.insert(80);
-        tree.insert(75);
-        /*tree.root = new BSTNode<>(1);
-        tree.root.left = new BSTNode<>(2);
-        tree.root.right = new BSTNode<>(3);
-        tree.root.left.left = new BSTNode<>(4);
-        tree.root.left.right = new BSTNode<>(5);*/
+        Phonebook phonebook = new Phonebook(new Contact("António", "911111111"));
+        Contact temp = new Contact("António", "123456789");
+        temp.addNumber("987654321");
+        temp.addNumber("123987456");
+        temp.addNumber("111111111");
+        phonebook.insert(temp);
+
+        phonebook.insert(new Contact("Tomás", "910748063"));
+        phonebook.insert(new Contact("João", "910748111"));
+        phonebook.insert(new Contact("Gui", "910748222"));
+        phonebook.insert(new Contact("Bernardo", "910748333"));
+
+        System.out.println(phonebook.getCallerID("111111111") + " Size: " + phonebook.getSize());
+        phonebook.remove("António");
+        System.out.println(phonebook.getCallerID("111111111") + " Size: " + phonebook.getSize());
+
 
         //System.out.println("\nInorder traversal of binary tree is ");
-        //tree.printInOrder();
-        System.out.println("The maximum value of BST is " + tree.findMax());
-        System.out.println(tree.contains(3));
+        //System.out.println("The maximum value of BST is " + tree.findMin());
+        //tree.findMin().getNumbers();
     }
 }

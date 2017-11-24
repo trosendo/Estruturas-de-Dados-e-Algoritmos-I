@@ -3,26 +3,48 @@ import java.util.Iterator;
 public class BinarySearchTree<E extends Comparable<? super E>> implements Iterable<E>, IBST<E> {
 
     BSTNode<E> root;
+    int size;
 
     public BinarySearchTree(E x) {
         root = new BSTNode<>(x);
+        size = 1;
     }
 
     public BinarySearchTree(BSTNode<E> r) {
         root = r;
+        size = 0;
     }
 
     public BinarySearchTree() {
         root = null;
+        size = 0;
     }
 
     public BinarySearchTree(E r, BSTNode<E> e, BSTNode<E> d) {
         root = new BSTNode<>(r, e, d);
+        size = 3;
     }
 
     @Override
     public boolean isEmpty() {
-        return root.element == null;
+        return root == null;
+    }
+
+    public E getElement(E x) {
+        return getElement(x, root);
+    }
+    public E getElement(E x, BSTNode<E> node){
+        if(node == null)
+            return null;
+
+        if(node.element.compareTo(x) == 0)
+            return node.element;
+
+        if(node.element.compareTo(x) > 0)
+            return getElement(x, node.left);
+        else
+            return getElement(x, node.right);
+
     }
 
     @Override
@@ -31,16 +53,16 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
     }
 
     public boolean contains(E x, BSTNode<E> n){
-        if (n.element == null)
+        if (n == null)
             return false;
         if (n.element.compareTo(x) == 0)
             return true;
 
-        if (x.compareTo(n.element) < 0){     // if(x < root.element)
+        if (x.compareTo(n.element) < 0)    // if(x < root.element)
             return contains(x, n.left);
-        } else {                                // if(x > root.element)
+        else                               // if(x > root.element)
             return contains(x, n.right);
-        }
+
     }
 
     @Override
@@ -71,6 +93,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
 
     @Override
     public void insert(E x) {
+        size++;
         root = insert(x, root);
     }
 
@@ -92,6 +115,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
 
     @Override
     public void remove(E x) {
+        size--;
         root = remove(x, root);
     }
 
@@ -141,12 +165,12 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
         printInOrder(root);
     }
 
-    public void printInOrder(BSTNode<E> node){
+    public void printInOrder(BSTNode<E> node){ //RETURN STRING WITH PRINTED ELEMENTS!!
         if(node == null)
             return;
 
         printInOrder(node.left);
-        System.out.println(node.element);
+        System.out.println("-> " + node.element);
         printInOrder(node.right);
     }
 
@@ -162,6 +186,10 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new BSTIterator<>(root, size);
+    }
+
+    public int getSize(){
+        return size;
     }
 }
