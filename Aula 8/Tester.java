@@ -14,7 +14,7 @@ public class Tester {
 
         System.out.println(phonebook.getCallerID("111111111") + " Size: " + phonebook.getSize());
         phonebook.remove("António");
-        System.out.println(phonebook.getCallerID("111111111") + " Size: " + phonebook.getSize());
+        System.out.println(phonebook.getCallerID("111111111"));
 
 
         //System.out.println("\nInorder traversal of binary tree is ");
